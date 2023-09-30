@@ -1,0 +1,24 @@
+#lang simply-scheme
+
+(define (square x) (* x x))
+
+(define (sqrt-iter guess x)
+  (if (good-enough? guess (improve guess x))
+      guess
+      (sqrt-iter (improve guess x) x)))
+
+(define (improve guess x)
+  (average guess (/ x guess)))
+
+(define (average x y)
+  (/ (+ x y) 2))
+
+(define (good-enough? previous-guess guess)
+  (< (abs (/ (- guess previous-guess) guess)) 0.0000000001))
+
+(define (square-root x)
+  (sqrt-iter 1.0 x))
+
+(square-root 29384579382475987)
+(square-root 0.00000002345234)
+(square (square-root 0.00000002345234))
